@@ -1,5 +1,6 @@
 #include "library.h"
 #include <stdlib.h>
+#include <string.h>
 
 int max(int a, int b) {
     return (a > b) ? a : b;
@@ -21,6 +22,18 @@ int getBalance(Node* node) {
 }
 
 
+Node* newNode(int key, char* value) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+
+    newNode->key = key;
+    strcpy(newNode->value, value);
+    newNode->left = NULL;
+    newNode->right = NULL;
+    newNode->height = 1;
+
+    return newNode;
+}
+
 
 Node* leftRotate(Node* node) {
 
@@ -31,13 +44,6 @@ Node* leftRotate(Node* node) {
 Node* rightRotate(Node* node) {
 
 }
-
-
-
-Node* newNode(int key, char* value) {
-
-}
-
 
 
 Node* insert(Node* node, int key, char* value) {
