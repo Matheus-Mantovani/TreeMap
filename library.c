@@ -35,14 +35,32 @@ Node* newNode(int key, char* value) {
 }
 
 
-Node* leftRotate(Node* node) {
+Node* leftRotate(Node* root) {
+    Node* pivot = root->right;
+    Node* pivotLeftChild = pivot->left;
 
+    pivot->left = root;
+    root->right = pivotLeftChild;
+
+    root->height = max(height(root->left), height(root->right)) + 1;
+    pivot->height = max(height(pivot->left), height(pivot->right)) + 1;
+
+    return pivot;
 }
 
 
 
-Node* rightRotate(Node* node) {
+Node* rightRotate(Node* root) {
+    Node* pivot = root->left;
+    Node* pivotRightChild = pivot->right;
 
+    pivot->right = root;
+    root->left = pivotRightChild;
+
+    root->height = max(height(root->left), height(root->right)) + 1;
+    pivot->height = max(height(pivot->left), height(pivot->right)) + 1;
+
+    return pivot;
 }
 
 
