@@ -11,7 +11,11 @@ int height(Node* node) {
     return (node == NULL) ? 0 : node->height;
 }
 
-
+void updateHeight(Node* node) {
+    int leftHeight = height(node->left);
+    int rightHeight = height(node->right);
+    node->height = 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
+}
 
 int getBalance(Node* node) {
     if(node == NULL) {
@@ -26,7 +30,7 @@ Node* newNode(int key, char* value) {
     Node* newNode = (Node*)malloc(sizeof(Node));
 
     newNode->key = key;
-    strcpy(newNode->value, value);
+    newNode->value = strdup(value); //replace the use of malloc
     newNode->left = NULL;
     newNode->right = NULL;
     newNode->height = 1;
@@ -65,7 +69,52 @@ Node* rightRotate(Node* root) {
 
 
 Node* insert(Node* node, int key, char* value) {
+    if(node == NULL) {
+        return newNode(key, value);
+    }
 
+    if(key < node->key) {
+        //lower keys go to the left
+        node->left = insert(node->left, key, value);
+    } else if(key > node->key) {
+        //higher keys go to the right
+        node->right = insert(node->right, key, value);
+    } else {
+        //key already exists
+        return node;
+    }
+
+    updateHeight(node);
+
+    int balance = getBalance(node);
+
+    //simple right rotation
+    //occurs when the newNode is inserted to the left of the left subtree
+    if(balance > 1 && node->left && key < node->left->key) {
+        return rightRotate(node);
+    }
+
+    //simple left rotation
+    //occurs when the newNode is inserted to the right of the right subtree
+    if(balance < -1 && node->right && key > node->right->key) {
+        return leftRotate(node);
+    }
+
+    //double rotation, left then right
+    //occurs when the newNode is inserted to the right of the left subtree
+    if(balance > 1 && node->left && key > node->left->key) {
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
+    }
+
+    //double rotation, right then left
+    //occurs when the newNode is inserted to the left of the right subtree
+    if(balance < -1 && node->right && key < node->right->key) {
+        node->right = rightRotate(node->right);
+        return leftRotate(node);
+    }
+
+    return node;
 }
 
 
