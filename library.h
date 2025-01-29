@@ -13,6 +13,7 @@ int height(Node* node);
 int getBalance(Node* node);
 void inOrderValues(Node* root);
 void inOrderKeys(Node* root);
+void inOrderKeysAndValues(Node* root);
 Node* leftRotate(Node* root);
 Node* rightRotate(Node* root);
 Node* newNode(int key, char* value);

@@ -43,6 +43,15 @@ void inOrderKeys(Node* root) {
     inOrderKeys(root->right);
 }
 
+void inOrderKeysAndValues(Node* root) {
+    if(root == NULL) {
+        return;
+    }
+    inOrderKeysAndValues(root->left);
+    printf("[Key: %d || Value: %s]\n", root->key, root->value);
+    inOrderKeysAndValues(root->right);
+}
+
 
 Node* newNode(int key, char* value) {
     Node* newNode = (Node*)malloc(sizeof(Node));
