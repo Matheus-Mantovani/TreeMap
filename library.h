@@ -8,6 +8,7 @@ typedef struct Node {
     int height;
 }Node;
 
+void menu();
 int max(int a, int b);
 int height(Node* node);
 int getBalance(Node* node);

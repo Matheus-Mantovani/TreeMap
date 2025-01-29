@@ -2,6 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+void menu() {
+    printf("\n===== AVL Tree Menu =====\n");
+    printf("1. Insert Node\n");
+    printf("2. Print All Keys\n");
+    printf("3. Print All Values\n");
+    printf("4. Print All Keys and Values\n");
+    printf("0. Exit\n");
+}
+
 int max(int a, int b) {
     return (a > b) ? a : b;
 }
@@ -107,9 +116,10 @@ Node* insert(Node* node, int key, char* value) {
         //higher keys go to the right
         node->right = insert(node->right, key, value);
     } else {
-        //key already exists
+        printf("Key already exists. Try again.\n");
         return node;
     }
+    printf("Node inserted successfully!\n");
 
     updateHeight(node);
 
