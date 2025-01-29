@@ -11,6 +11,8 @@ typedef struct Node {
 int max(int a, int b);
 int height(Node* node);
 int getBalance(Node* node);
+void inOrderValues(Node* root);
+void inOrderKeys(Node* root);
 Node* leftRotate(Node* root);
 Node* rightRotate(Node* root);
 Node* newNode(int key, char* value);

@@ -25,6 +25,24 @@ int getBalance(Node* node) {
     return height(node->left) - height(node->right);
 }
 
+void inOrderValues(Node* root) {
+    if(root == NULL) {
+        return;
+    }
+    inOrderValues(root->left);
+    printf("%s ", root->value);
+    inOrderValues(root->right);
+}
+
+void inOrderKeys(Node* root) {
+    if(root == NULL) {
+        return;
+    }
+    inOrderKeys(root->left);
+    printf("%d ", root->key);
+    inOrderKeys(root->right);
+}
+
 
 Node* newNode(int key, char* value) {
     Node* newNode = (Node*)malloc(sizeof(Node));
